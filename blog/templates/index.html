@@ -1,0 +1,45 @@
+{%extends 'base.html' %}
+
+{%block title%} My Blog {%endblock%}
+
+{%if messages%}
+{%for message in messages%}
+<div class="alert alert-danger" role="alert">
+    {{message}}
+</div>
+{%endfor%}
+{%endif%}
+
+{%block content%}
+
+    <div class="container mt-3">
+      <h1>My Blog</h1>
+      <hr>
+      <div class="row">
+        <div class="col-md-8">
+          <!-- Loop through all blog posts -->
+          {%for post in posts reversed%}
+          <div class="card mb-3">
+            <div class="card-body">
+              <h2 class="card-title">{{post.title}}</h2>
+              <p class="card-text">{{ post.body|truncatewords:20 }}...</p>
+              <p class="card-text"><small class="text-muted">By: {{post.author}} | {{post.created_at}}</small></p>
+              <a href="{% url 'post' post.id%}" class="btn btn-primary">Read More</a>
+            </div>
+          </div>
+            {%endfor%}
+        </div>
+        <div class="col-md-4">
+          <!-- Add a sidebar if desired -->
+          <div class="card mb-3">
+            <div class="card-body">
+              <h4 class="card-title">About Me</h4>
+              <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec lacus lectus. Sed hendrerit nulla in ante porttitor, a gravida enim sagittis.</p>
+              <a href="#" class="btn btn-primary">Learn More</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+ {%endblock%}
+
